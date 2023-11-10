@@ -1,5 +1,7 @@
 FROM nginx:alpine
 
+LABEL org.opencontainers.image.source https://github.com/silenteer/proxier
+
 ARG OS
 ARG ARCH
 
