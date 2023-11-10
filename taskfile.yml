@@ -10,4 +10,18 @@ tasks:
   build:
     desc: dockerize the app
     cmds:
-      - docker build -t silentium/proxier:$(cat version) .
+      - docker build -t ghcr.io/silenteer/proxier:$(cat version) .
+
+  push:
+    desc: push image to docker
+    cmds:
+      - docker push ghcr.io/silenteer/proxier:$(cat version)
+      - docker tag ghcr.io/silenteer/proxier:$(cat version) ghcr.io/silenteer/proxier:latest
+      - docker push ghcr.io/silenteer/proxier:latest
+
+  release:
+    desc: bump, build and release
+    cmds:
+      - task: bump
+      - task: build
+      - task: push
