@@ -1,0 +1,13 @@
+version: "3"
+
+tasks:
+  bump:
+    desc: bump version from version file
+    cmds:
+      - echo $(cat version | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g') > version.next
+      - mv version.next version
+
+  build:
+    desc: dockerize the app
+    cmds:
+      - docker build -t silentium/proxier:$(cat version) .
